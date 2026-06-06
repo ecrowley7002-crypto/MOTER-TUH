@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Motor T MTVR iPhone Quiz</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:rgba(34,197,94,.25)}
+body{margin:0;background:#07101f;color:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;padding-bottom:100px}
+.wrap{max-width:850px;margin:0 auto;padding:14px}
+.top{position:sticky;top:0;background:#07101f;padding:10px 0 14px;z-index:10;border-bottom:1px solid #1e293b}
+h1{font-size:28px;margin:8px 0 10px;line-height:1.1}
+.stat{font-size:16px;color:#cbd5e1;margin:5px 0}
+.bar{height:17px;background:#263244;border-radius:999px;overflow:hidden;margin-top:8px}
+.fill{height:100%;width:0%;background:#22c55e;transition:width .2s}
+.card{background:#111827;border:1px solid #334155;border-radius:18px;padding:17px;margin-top:18px}
+.qnum{font-size:16px;color:#93c5fd;font-weight:900;margin-bottom:8px}
+.qtext{font-size:23px;font-weight:900;line-height:1.25;margin-bottom:15px}
+.option{display:flex;align-items:flex-start;gap:12px;width:100%;padding:15px;margin:10px 0;border-radius:14px;background:#1e293b;border:1px solid #475569;color:#fff;font-size:19px;line-height:1.3;cursor:pointer;touch-action:manipulation;text-align:left}
+.option:disabled{opacity:1}
+.bubble{width:23px;height:23px;border:2px solid #cbd5e1;border-radius:50%;flex:none;margin-top:1px;background:#0f172a}
+.option.correct{background:#14532d;border-color:#22c55e}
+.option.correct .bubble{background:#22c55e;border-color:#bbf7d0}
+.option.wrong{background:#7f1d1d;border-color:#ef4444}
+.option.wrong .bubble{background:#ef4444;border-color:#fecaca}
+.msg{font-size:18px;line-height:1.4;color:#e2e8f0;min-height:65px}
+.good{color:#bbf7d0;font-weight:900}
+.bad{color:#fecaca;font-weight:900}
+.bottom{position:fixed;left:0;right:0;bottom:0;background:rgba(7,16,31,.97);border-top:1px solid #334155;padding:12px 14px calc(12px + env(safe-area-inset-bottom));z-index:30}
+.bottomin{max-width:850px;margin:0 auto;text-align:left}
+.next{background:#2563eb;color:white;border:0;border-radius:14px;padding:15px 22px;font-size:19px;font-weight:900;min-width:130px}
+.next:disabled{background:#475569;opacity:.55}
+.secondary{background:#334155;color:white;border:0;border-radius:14px;padding:14px 16px;font-size:18px;font-weight:850;margin:7px 0;width:100%}
+.review{background:#0f172a;border:1px solid #334155;border-radius:12px;padding:12px;margin:10px 0}
+.small{font-size:15px;color:#94a3b8;line-height:1.35}
+.err{background:#7f1d1d;border:1px solid #ef4444;border-radius:14px;padding:12px;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>Motor T MTVR Smart Quiz</h1>
+    <div id="progressText" class="stat">Loading quiz… 0%</div>
+    <div id="scoreText" class="stat">Score: 0%</div>
+    <div class="bar"><div id="fill" class="fill"></div></div>
+  </div>
+  <div id="card" class="card">
+    <div class="qtext">Loading quiz…</div>
+    <p class="msg">Preparing randomized questions.</p>
+  </div>
+</div>
+<div class="bottom"><div class="bottomin"><button id="nextBtn" class="next" disabled>Next</button></div></div>
+
+<script id="questionData" type="application/json">[{"num": 1, "q": "What is the primary purpose of MK-series MTVR vehicles?", "choices": ["Transport ammunition only", "Transport cargo and personnel", "Serve as armored combat vehicles", "Provide medical evacuation"], "correct": 1, "why": "MK-series MTVRs are medium tactical cargo trucks used to move cargo and personnel."}, {"num": 2, "q": "Which vehicles are included in the MK-series family?", "choices": ["MK20/21/22/24", "MK23/25/27/28", "MK30/31/32/33", "MK15/17/19/21"], "correct": 1, "why": "The study-guide cargo family shown is MK23, MK25, MK27, and MK28."}, {"num": 3, "q": "What is the length of the MK23/MK25?", "choices": ["250 in", "300 in", "314.9 in", "350 in"], "correct": 2, "why": "The MK23/MK25 standard cargo MTVR is about 315 inches long."}, {"num": 4, "q": "What is the MK23/MK25 cargo bed length?", "choices": ["10 ft", "12 ft", "14 ft", "20 ft"], "correct": 2, "why": "The standard cargo bed is 14 ft."}, {"num": 5, "q": "What is the curb weight of the MK23?", "choices": ["20,000 lbs", "24,500 lbs", "27,753 lbs", "30,000 lbs"], "correct": 2, "why": "The listed MK23 curb weight is about 27,753 lbs."}, {"num": 6, "q": "What is the reducible height of the MK23/MK25?", "choices": ["80 in", "90 in", "98 in", "110 in"], "correct": 2, "why": "The MTVR reducible/transport height is 98 inches."}, {"num": 7, "q": "What is the MK23/MK25 highway ground clearance?", "choices": ["14.5 in", "16.7 in", "18 in", "20 in"], "correct": 1, "why": "The highway ground clearance listed is 16.7 inches."}, {"num": 8, "q": "What is the width of MK-series MTVRs?", "choices": ["80 in", "90 in", "98 in", "110 in"], "correct": 2, "why": "The MTVR width is 98 inches."}, {"num": 9, "q": "What is the MK27/MK28 vehicle length?", "choices": ["300 in", "320 in", "386.5 in", "420 in"], "correct": 2, "why": "The MK27/MK28 extended cargo MTVR is longer than the MK23/MK25, about 386.5 inches."}, {"num": 10, "q": "Which vehicles have rear-deploying winches?", "choices": ["MK23 and MK25", "MK23 and MK27", "MK25 and MK28", "MK27 and MK28"], "correct": 2, "why": "The winch variants are MK25 and MK28."}, {"num": 11, "q": "What powers the hydraulic pump?", "choices": ["Electric motor", "PTO shaft", "Turbocharger", "Alternator"], "correct": 1, "why": "The hydraulic pump is powered by the PTO shaft."}, {"num": 12, "q": "The hydraulic pump powers which system?", "choices": ["CTIS", "ABS", "Self-recovery winch", "Steering assist"], "correct": 2, "why": "The hydraulic pump powers the self-recovery winch system."}, {"num": 13, "q": "Mechanical power flows from engine → transmission → transfer case → ____?", "choices": ["Battery", "Fuel system", "Axles", "Radiator"], "correct": 2, "why": "After the transfer case, drivetrain power goes to the axles."}, {"num": 14, "q": "The electrical system includes alternator and ____?", "choices": ["CTIS", "Ancillary circuits", "Winch controls", "Power steering"], "correct": 1, "why": "The electrical system includes the alternator and supporting ancillary circuits."}, {"num": 15, "q": "ABS prevents wheel lock by adjusting:", "choices": ["Fuel pressure", "Brake air pressure", "Coolant temperature", "Oil pressure"], "correct": 1, "why": "ABS prevents lock-up by modulating brake air pressure."}, {"num": 16, "q": "ATC responds to wheel slip by:", "choices": ["Applying service brakes", "Increasing fuel delivery", "Throttling engine power", "Locking the differential"], "correct": 2, "why": "ATC can reduce/throttle engine power when wheel slip is detected."}, {"num": 17, "q": "What enhances drivetrain function?", "choices": ["ECM", "Coolant", "Winch system", "Air dryer"], "correct": 0, "why": "The ECM helps control drivetrain-related engine operation."}, {"num": 18, "q": "The MTVR transmission is paired with what engine?", "choices": ["Cummins N14", "Caterpillar C-12", "Detroit DD60", "Volvo D13"], "correct": 1, "why": "The MTVR uses the Caterpillar C-12 engine with its automatic transmission."}, {"num": 19, "q": "Which is a major transmission component?", "choices": ["CTIS controller", "Transmission ECU", "Steering cylinder", "Surge tank"], "correct": 1, "why": "The Transmission ECU is part of the transmission control system."}, {"num": 20, "q": "The transfer case provides:", "choices": ["2WD", "4WD selectable", "Full-time AWD", "Rear-wheel drive"], "correct": 2, "why": "The MTVR transfer case provides full-time all-wheel drive/6x6 drive."}, {"num": 21, "q": "How many half-shafts does the MTVR use?", "choices": ["4", "5", "6", "8"], "correct": 2, "why": "The 6x6 independent suspension uses six half-shafts."}, {"num": 22, "q": "What removes heat from the coolant?", "choices": ["Aftercooler", "Radiator core airflow", "Air dryer", "Fuel cooler"], "correct": 1, "why": "Airflow through the radiator core removes heat from the coolant."}, {"num": 23, "q": "What component compresses intake air?", "choices": ["Air filter", "Turbocharger", "Charge air cooler", "CTIS"], "correct": 1, "why": "The turbocharger compresses intake air."}, {"num": 24, "q": "What removes water and large particles from fuel?", "choices": ["Fuel filter", "Fuel/water separator", "Oil cooler", "Surge tank"], "correct": 1, "why": "The fuel/water separator removes water and larger contamination from fuel."}, {"num": 25, "q": "What voltage system does the MTVR use?", "choices": ["12 VDC", "18 VDC", "24 VDC", "48 VDC"], "correct": 2, "why": "The MTVR uses a 24 VDC electrical system."}, {"num": 26, "q": "Where is the battery box located?", "choices": ["Right side, rear", "Left side, in front of axle #2", "Behind cab roof", "Under passenger seat"], "correct": 1, "why": "The battery box is on the left side in front of axle #2."}, {"num": 27, "q": "What component interprets diagnostic info?", "choices": ["ACU", "Radiator shroud", "MIC/TIM", "Tachometer"], "correct": 2, "why": "MIC/TIM is the diagnostic/interface unit used for interpreting displayed diagnostic information."}, {"num": 28, "q": "The air dryer removes:", "choices": ["Oil", "Water and debris", "Fuel vapors", "Coolant residue"], "correct": 1, "why": "The air dryer removes water and debris from the air system."}, {"num": 29, "q": "How many air tanks are on the MTVR?", "choices": ["2", "3", "4", "5"], "correct": 1, "why": "The MTVR air system uses three air reservoirs/tanks."}, {"num": 30, "q": "The self-recovery winch deploys:", "choices": ["Forward only", "Rearward only", "Laterally", "All directions"], "correct": 1, "why": "The self-recovery winch on the listed winch variants is rear-deploying."}, {"num": 31, "q": "The wheel/tire assembly includes all EXCEPT:", "choices": ["Bead lock", "CTIS wheel valve", "Radiator hose", "Wheel cover"], "correct": 2, "why": "A radiator hose is not part of the wheel/tire assembly."}, {"num": 32, "q": "What keeps the tire seated during low tire pressure?", "choices": ["CTIS valve", "Bead lock", "Sealant", "Hub gears"], "correct": 1, "why": "A bead lock helps keep the tire seated at low pressure."}, {"num": 33, "q": "What does CTIS adjust?", "choices": ["Engine timing", "Tire pressure", "Brake pressure", "Axle oil"], "correct": 1, "why": "CTIS stands for Central Tire Inflation System and adjusts tire pressure."}, {"num": 34, "q": "How many terrain modes does CTIS have?", "choices": ["2", "3", "4", "5"], "correct": 2, "why": "The terrain modes are HWY, CC, MSS, and EMER."}, {"num": 35, "q": "What CTIS mode has a 45 mph max speed?", "choices": ["MSS", "EMER", "HWY", "CC"], "correct": 3, "why": "CC mode is the 45 mph mode in this study guide set."}, {"num": 36, "q": "What CTIS mode is used for secondary roads?", "choices": ["HWY", "CC", "MSS", "EMER"], "correct": 1, "why": "CC is used for cross-country/secondary road conditions."}, {"num": 37, "q": "What CTIS mode is used for soft terrain?", "choices": ["HWY", "CC", "MSS", "EMER"], "correct": 2, "why": "MSS means Mud, Sand, and Snow, used for soft terrain."}, {"num": 38, "q": "Which CTIS mode allows extremely low pressure?", "choices": ["EMER", "CC", "HWY", "MSS"], "correct": 0, "why": "EMER allows extremely low tire pressure for emergency mobility."}, {"num": 39, "q": "What CTIS load mode is used when the vehicle is empty?", "choices": ["7.1–15 tons", "2–7.1 tons", "0–2 tons", "Run flat"], "correct": 2, "why": "The empty/light load setting is 0–2 tons."}, {"num": 40, "q": "What feature warns the operator that speed exceeds CTIS limits?", "choices": ["ATC indicator", "Overspeed indicator", "ABS light", "Check tires light"], "correct": 1, "why": "The overspeed indicator warns when the vehicle exceeds CTIS speed limits."}, {"num": 41, "q": "What is the MTVR's max authorized speed fully loaded?", "choices": ["35 mph", "45 mph", "55 mph", "65 mph"], "correct": 3, "why": "The MTVR's listed maximum speed is 65 mph."}, {"num": 42, "q": "What is the off-road speed limit?", "choices": ["10 mph", "15 mph", "20 mph", "25 mph"], "correct": 1, "why": "The study guide lists 15 mph as the off-road speed limit."}, {"num": 43, "q": "What is the max incline the MTVR can traverse?", "choices": ["30%", "40%", "50%", "60%"], "correct": 3, "why": "The MTVR can traverse up to a 60% grade/incline."}, {"num": 44, "q": "What is the max fording depth?", "choices": ["36 in", "48 in", "60 in", "72 in"], "correct": 2, "why": "The max fording depth is 60 inches."}, {"num": 45, "q": "What is the MTVR operating range when fully loaded?", "choices": ["150 miles", "300 miles", "450 miles", "600 miles"], "correct": 1, "why": "The listed cruising/operating range is 300 miles."}, {"num": 46, "q": "Off-road cargo capacity is:", "choices": ["3 tons", "5 tons", "7.1 tons", "10 tons"], "correct": 2, "why": "The MTVR is rated up to 7.1 tons off-road."}, {"num": 47, "q": "On-road cargo capacity is:", "choices": ["7.1 tons", "10 tons", "12 tons", "15 tons"], "correct": 3, "why": "The MTVR is rated up to 15 tons on-road."}, {"num": 48, "q": "How many passengers can the MK23/25 cargo bed carry?", "choices": ["10", "12", "16", "20"], "correct": 1, "why": "The MK23/25 cargo bed carries 12 passengers."}, {"num": 49, "q": "How many passengers can the MK27/28 cargo bed carry?", "choices": ["12", "16", "20", "24"], "correct": 2, "why": "The extended MK27/28 cargo bed carries 20 passengers."}, {"num": 50, "q": "What is the maximum towing capacity?", "choices": ["12,000 lbs", "18,000 lbs", "22,000 lbs", "28,000 lbs"], "correct": 3, "why": "The maximum towing capacity listed is 28,000 lbs."}, {"num": 51, "q": "How much horsepower does the C-12 engine produce?", "choices": ["350 HP", "375 HP", "400 HP", "425 HP"], "correct": 3, "why": "The Caterpillar C-12 produces 425 HP."}, {"num": 52, "q": "Why must the turbo be cooled after missions?", "choices": ["Prevent coolant loss", "Prevent turbo damage", "Boost fuel economy", "Reduce exhaust temps"], "correct": 1, "why": "Cool-down helps prevent heat damage to the turbocharger."}, {"num": 53, "q": "What is the cooling system capacity?", "choices": ["20 qts", "30 qts", "40.5 qts", "50 qts"], "correct": 2, "why": "The listed cooling system capacity is 40.5 quarts."}, {"num": 54, "q": "What is the fuel tank capacity?", "choices": ["50 gallons", "60 gallons", "80 gallons", "100 gallons"], "correct": 2, "why": "The MTVR fuel tank capacity is about 80 gallons."}, {"num": 55, "q": "What is the usable fuel amount?", "choices": ["40 gallons", "60 gallons", "70 gallons", "76 gallons"], "correct": 3, "why": "Usable fuel is listed as 76 gallons."}, {"num": 56, "q": "What component cleans small particles from fuel?", "choices": ["Separator", "Fuel filter", "CTIS valve", "Air dryer"], "correct": 1, "why": "The fuel filter removes small particles from fuel."}, {"num": 57, "q": "What is the purpose of the fuel priming pump?", "choices": ["Cool injectors", "Purge air", "Add fuel capacity", "Pressurize turbo"], "correct": 1, "why": "The priming pump purges air from the fuel system."}, {"num": 58, "q": "The alternator produces how much voltage?", "choices": ["12V", "24V", "28V", "36V"], "correct": 2, "why": "A 24V vehicle charging system commonly charges at about 28V."}, {"num": 59, "q": "The starter requires how much voltage?", "choices": ["12V", "18V", "24V", "36V"], "correct": 2, "why": "The starter uses 24V vehicle power."}, {"num": 60, "q": "How many forward gears does the MTVR have?", "choices": ["5", "6", "7", "8"], "correct": 2, "why": "The MTVR's Allison automatic transmission has 7 forward gears."}, {"num": 61, "q": "What percentage of torque is sent to the front axle?", "choices": ["20%", "32%", "50%", "68%"], "correct": 1, "why": "The transfer case sends about 32% of torque to the front axle."}, {"num": 62, "q": "How many drive shafts are on the MTVR?", "choices": ["2", "3", "4", "5"], "correct": 2, "why": "The drivetrain uses four drive shafts in this study guide set."}, {"num": 63, "q": "What type of hub is used on the MTVR?", "choices": ["Sealed hub", "Gear-type hub", "Liquid hub", "Magnetic hub"], "correct": 1, "why": "The MTVR uses gear-type hubs."}, {"num": 64, "q": "Normal air pressure range is:", "choices": ["50–75 PSI", "80–95 PSI", "100–125 PSI", "130–150 PSI"], "correct": 2, "why": "Normal air pressure is 100–125 PSI."}, {"num": 65, "q": "What type of brakes does the MTVR use?", "choices": ["Disc", "Drum", "Hydraulic", "Magnetic"], "correct": 1, "why": "The MTVR uses drum brakes."}, {"num": 66, "q": "What activates the parking brake?", "choices": ["Red knob", "Yellow knob", "CTIS", "Steering valve"], "correct": 1, "why": "The yellow knob controls the parking brake."}, {"num": 67, "q": "What supplies trailer brake air?", "choices": ["Yellow knob", "Red knob", "CTIS", "Engine ECU"], "correct": 1, "why": "The red knob is the trailer air supply control."}, {"num": 68, "q": "What system applies brakes in slippery conditions?", "choices": ["ABS", "ATC", "CTIS", "ECM"], "correct": 1, "why": "ATC can apply braking/control to reduce wheel slip in slippery conditions."}, {"num": 69, "q": "What system prevents wheel lock-up?", "choices": ["ATC", "ABS", "ECM", "CTIS"], "correct": 1, "why": "ABS prevents wheel lock-up during braking."}, {"num": 70, "q": "What does CTIS modify besides tire pressure?", "choices": ["Driveline lock configuration", "Fuel flow", "Brake timing", "Coolant heat"], "correct": 0, "why": "CTIS can modify driveline lock configuration with tire-pressure modes."}, {"num": 71, "q": "Where is the CTIS panel located?", "choices": ["Right dash", "Left of instrument panel", "Roof", "Steering column"], "correct": 1, "why": "The CTIS panel is located left of the instrument panel."}, {"num": 72, "q": "The headlight switch has how many positions?", "choices": ["1", "2", "3", "4"], "correct": 2, "why": "The headlight switch has three positions."}, {"num": 73, "q": "What switch changes vehicle lighting between normal & blackout modes?", "choices": ["Light dimmer", "Blackout select switch", "Wiper switch", "CTIS switch"], "correct": 1, "why": "The blackout select switch changes between normal and blackout lighting modes."}, {"num": 74, "q": "The blackout light switch has how many positions?", "choices": ["1", "2", "3", "4"], "correct": 2, "why": "The blackout light switch has three positions."}, {"num": 75, "q": "Wiper control switch has how many positions?", "choices": ["1", "2", "3", "4"], "correct": 3, "why": "The wiper control switch has four positions."}, {"num": 76, "q": "The washer switch is:", "choices": ["Two-position", "One-position momentary", "Toggle switch", "Automatic sensor"], "correct": 1, "why": "The washer switch is a one-position momentary switch."}, {"num": 77, "q": "What controls tire pressure display warnings?", "choices": ["ABS", "ATC", "CTIS", "ECM"], "correct": 2, "why": "CTIS controls tire-pressure display warnings."}, {"num": 78, "q": "The air pressure gauge should read:", "choices": ["50–80 PSI", "80–100 PSI", "100–125 PSI", "150–200 PSI"], "correct": 2, "why": "Normal air pressure should be 100–125 PSI."}, {"num": 79, "q": "Which gauge displays engine RPM?", "choices": ["Speedometer", "Tachometer", "Volt gauge", "Odometer"], "correct": 1, "why": "The tachometer displays engine RPM."}, {"num": 80, "q": "Low air warnings are triggered by:", "choices": ["Steering pressure", "Fan switch", "Air system reservoirs", "CTIS valve"], "correct": 2, "why": "Low air warnings come from low pressure in the air system reservoirs."}, {"num": 81, "q": "Where is the battery box located?", "choices": ["Right rear", "Left side, in front of axle #2", "Under engine", "Roof panel"], "correct": 1, "why": "The battery box is on the left side in front of axle #2."}, {"num": 82, "q": "How many batteries may be installed?", "choices": ["2 only", "Up to 3", "Up to 4", "Unlimited"], "correct": 2, "why": "The MTVR may have up to four batteries installed."}, {"num": 83, "q": "Spotter mirrors are used for:", "choices": ["Long-distance viewing", "Blind spots", "Night driving", "Fog navigation"], "correct": 1, "why": "Spotter mirrors help the driver see blind spots."}, {"num": 84, "q": "Where is the wiper fluid reservoir?", "choices": ["Behind radiator", "In battery box", "Passenger side firewall", "Under CTIS panel"], "correct": 2, "why": "The wiper fluid reservoir is on the passenger side firewall."}, {"num": 85, "q": "The hydraulic reservoir is found on which vehicles?", "choices": ["MK23/27", "MK25/28", "MK23 only", "All MK vehicles"], "correct": 1, "why": "The hydraulic reservoir is on the winch vehicles, MK25 and MK28."}, {"num": 86, "q": "How many gladhands are on the MTVR?", "choices": ["2", "3", "4", "5"], "correct": 2, "why": "The MTVR has four gladhands for trailer air connections."}, {"num": 87, "q": "What does the pintle hook do?", "choices": ["Stabilizes cargo", "Connects trailers", "Houses CTIS valves", "Guides airflow"], "correct": 1, "why": "A pintle hook connects trailers."}, {"num": 88, "q": "What does the NATO slave receptacle transfer?", "choices": ["Fuel", "Coolant", "24-volt power", "Brake air"], "correct": 2, "why": "The NATO slave receptacle transfers 24-volt electrical power."}, {"num": 89, "q": "The fuel tank is located:", "choices": ["Right side door", "Under driver's door", "Rear center", "Roof mount"], "correct": 1, "why": "The fuel tank is located under the driver's door area."}, {"num": 90, "q": "The fuel/water separator removes:", "choices": ["Lead", "Oil", "Dirt and water", "Coolant"], "correct": 2, "why": "The separator removes dirt and water from fuel."}, {"num": 91, "q": "Where is the hydraulic steering reservoir located?", "choices": ["Roof", "Right side", "Left side of engine", "Under CTIS"], "correct": 1, "why": "The hydraulic steering reservoir is on the right side."}, {"num": 92, "q": "The machine gun roof cover:", "choices": ["Stores tools", "Provides ventilation", "Allows gun mounting", "Lowers cab height"], "correct": 2, "why": "The roof cover allows machine-gun mounting when removed/opened."}, {"num": 93, "q": "Rear mud flaps may be:", "choices": ["Removed only", "Raised or lowered", "Locked in place", "Electrically lifted"], "correct": 1, "why": "Rear mud flaps may be raised or lowered."}, {"num": 94, "q": "ISO locks secure:", "choices": ["Ammo cans", "Tires", "ISO containers", "Fuel pumps"], "correct": 2, "why": "ISO locks secure ISO containers."}, {"num": 95, "q": "Exterior lights include all EXCEPT:", "choices": ["Clearance lights", "Blackout lights", "Reverse alarm", "Radiator lights"], "correct": 3, "why": "Radiator lights are not an exterior lighting category."}, {"num": 96, "q": "AFES detects fire using:", "choices": ["Heat sensors", "UV/IR sensors", "Thermal paint", "Coolant pressure"], "correct": 1, "why": "AFES detects fire using UV/IR sensors."}, {"num": 97, "q": "AFES agent includes:", "choices": ["Water", "Halon", "HFC227ea + Sodium Bicarbonate", "Steam"], "correct": 2, "why": "AFES uses HFC227ea and sodium bicarbonate, not water, Halon, or steam."}, {"num": 98, "q": "AFES discharges at:", "choices": ["200 psi", "500 psi", "900 psi", "1200 psi"], "correct": 2, "why": "The listed AFES discharge pressure is 900 psi."}, {"num": 99, "q": "Backup module provides power for how long?", "choices": ["5 min", "10 min", "15 min", "30 min"], "correct": 1, "why": "The backup module provides power for 10 minutes."}, {"num": 100, "q": "The external manual AFES switch allows operation:", "choices": ["Only from driver seat", "Only with ignition ON", "From outside the cab", "Only during winching"], "correct": 2, "why": "The external manual AFES switch allows operation from outside the cab."}]</script>
+<script>
+var original=[], questions=[], current=0, correct=0, answered=0, locked=false, wrongs=[], lastWrongs=[];
+var nextBtn=document.getElementById("nextBtn");
+
+window.onerror=function(msg,src,line,col,err){
+  document.getElementById("card").innerHTML='<div class="err"><b>Quiz error:</b><br>'+safe(msg)+'<br>Line '+line+'</div>';
+};
+
+function byId(id){return document.getElementById(id);}
+function safe(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function setLoad(p,msg){
+  byId("progressText").textContent="Loading quiz… "+p+"%";
+  byId("fill").style.width=p+"%";
+  byId("card").innerHTML='<div class="qtext">Loading quiz… '+p+'%</div><p class="msg">'+msg+'</p>';
+}
+function shuffle(a){
+  var arr=a.slice();
+  for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)); var t=arr[i]; arr[i]=arr[j]; arr[j]=t;}
+  return arr;
+}
+function boot(){
+  setLoad(15,"Reading question bank.");
+  setTimeout(function(){
+    original=JSON.parse(byId("questionData").textContent);
+    setLoad(45,"Randomizing order.");
+    setTimeout(function(){
+      questions=shuffle(original);
+      current=0; correct=0; answered=0; locked=false; wrongs=[]; lastWrongs=[];
+      setLoad(85,"Building first question.");
+      setTimeout(function(){
+        render();
+      },120);
+    },120);
+  },120);
+}
+function render(){
+  locked=false;
+  var q=questions[current];
+  var out='<div class="qnum">Question '+(current+1)+' of '+questions.length+' • Original #'+q.num+'</div>';
+  out+='<div class="qtext">'+safe(q.q)+'</div>';
+  for(var i=0;i<q.choices.length;i++){
+    out+='<button class="option" onclick="pick('+i+')"><span class="bubble"></span><span>'+String.fromCharCode(65+i)+'. '+safe(q.choices[i])+'</span></button>';
+  }
+  out+='<p id="msg" class="msg">Pick one answer. Once you pick, it locks in.</p>';
+  byId("card").innerHTML=out;
+  nextBtn.disabled=true;
+  nextBtn.textContent=(current===questions.length-1)?"Finish":"Next";
+  updateBars();
+  window.scrollTo(0,0);
+}
+function pick(i){
+  if(locked)return;
+  locked=true; answered++;
+  var q=questions[current];
+  var opts=document.getElementsByClassName("option");
+  for(var k=0;k<opts.length;k++)opts[k].disabled=true;
+  if(i===q.correct){
+    correct++;
+    opts[i].className+=" correct";
+    byId("msg").innerHTML='<span class="good">Good job.</span> '+safe(q.why);
+  }else{
+    opts[i].className+=" wrong";
+    opts[q.correct].className+=" correct";
+    wrongs.push(q);
+    lastWrongs.push({q:q,picked:i});
+    byId("msg").innerHTML='<span class="bad">Wrong.</span> Correct answer: <b>'+String.fromCharCode(65+q.correct)+'. '+safe(q.choices[q.correct])+'</b><br><br>'+safe(q.why);
+  }
+  nextBtn.disabled=false;
+  updateBars();
+}
+function next(){
+  if(!locked)return;
+  current++;
+  if(current>=questions.length)finish(); else render();
+}
+function updateBars(){
+  var pct=Math.round((answered/(questions.length||1))*100);
+  var score=answered?Math.round((correct/answered)*100):0;
+  byId("progressText").textContent=pct+"% complete • "+answered+" answered out of "+questions.length;
+  byId("scoreText").textContent="Score: "+score+"% • Correct: "+correct+" • Wrong: "+(answered-correct);
+  byId("fill").style.width=pct+"%";
+}
+function restartAll(){
+  questions=shuffle(original); current=0; correct=0; answered=0; locked=false; wrongs=[]; lastWrongs=[]; nextBtn.style.display="inline-block"; render();
+}
+function restartWrong(){
+  if(!lastWrongs.length)return;
+  questions=shuffle(lastWrongs.map(function(x){return x.q;})); current=0; correct=0; answered=0; locked=false; wrongs=[]; nextBtn.style.display="inline-block"; render();
+}
+function finish(){
+  var score=answered?Math.round((correct/answered)*100):0;
+  byId("progressText").textContent="100% complete";
+  byId("scoreText").textContent="Final score: "+score+"%";
+  byId("fill").style.width="100%";
+  nextBtn.style.display="none";
+  var out='<div class="qtext">Results</div><p style="font-size:22px">Final Score: <b>'+score+'%</b></p>';
+  out+='<p>Correct: '+correct+'<br>Wrong: '+(answered-correct)+'<br>Total: '+answered+'</p>';
+  out+='<button class="secondary" onclick="restartAll()">Restart whole test</button>';
+  if(lastWrongs.length)out+='<button class="secondary" onclick="restartWrong()">Study only the ones I got wrong</button>';
+  if(lastWrongs.length){out+='<h2>Missed Review</h2>'; for(var i=0;i<lastWrongs.length;i++){var item=lastWrongs[i],q=item.q; out+='<div class="review"><b>Original #'+q.num+'. '+safe(q.q)+'</b><br>You picked: '+String.fromCharCode(65+item.picked)+'. '+safe(q.choices[item.picked])+'<br>Correct: '+String.fromCharCode(65+q.correct)+'. '+safe(q.choices[q.correct])+'<br><span class="small">'+safe(q.why)+'</span></div>';}}
+  byId("card").innerHTML=out;
+  window.scrollTo(0,0);
+}
+nextBtn.onclick=next;
+setTimeout(boot,100);
+</script>
+</body>
+</html>
